@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解24点</title>
+    <script>
+        function count(n) {
+            const s = ["+", "-", "*", "/"];
+            var trueNumberList = [];
+            var nList1 = Array.from(n);
+            for (var ni1 = 0; ni1 < nList1.length; ni1++) {
+                var n1 = nList1[ni1];
+                for (var si1 = 0; si1 < s.length; si1++) {
+                    var s1 = s[si1];
+                    var nList2 = Array.from(nList1);
+                    nList2.splice(ni1, 1);
+                    for (var ni2 = 0; ni2 < nList2.length; ni2++) {
+                        var n2 = nList2[ni2];
+                        for (var si2 = 0; si2 < s.length; si2++) {
+                            var s2 = s[si2];
+                            var nList3 = Array.from(nList2);
+                            nList3.splice(ni2, 1);
+                            for (var ni3 = 0; ni3 < nList3.length; ni3++) {
+                                var n3 = nList3[ni3];
+                                for (var si3 = 0; si3 < s.length; si3++) {
+                                    var s3 = s[si3];
+                                    var nList4 = Array.from(nList3);
+                                    nList4.splice(ni3, 1);
+                                    for (var ni4 = 0; ni4 < nList4.length; ni4++) {
+                                        var n4 = nList4[ni4];
+                                        var formula = String(n1) + s1 + String(n2) + s2 + String(n3) + s3 + String(n4);
+                                        if (eval(formula) == 24 && !trueNumberList.includes(formula)) {
+                                            trueNumberList.push(formula);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            console.log(trueNumberList);
+            return trueNumberList;
+        }
+
+        function output(list) {
+            var outputObj = document.getElementById("output");
+            outputObj.innerHTML = "";
+            for (i = 0; i < list.length; i++){
+                var yuaninnerHTML = outputObj.innerHTML;
+                outputObj.innerHTML = outputObj.innerHTML + list[i] + "&#10";
+            }
+        }
+
+        function getFrom() {
+            var numbers = [];
+            var numbersObj = document.getElementsByClassName("numbers");
+            for (i = 0; i < numbersObj.length; i++) {
+                numbers.push(numbersObj[i].value);
+            }
+            console.log(numbers);
+            output(count(numbers));
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>
+            解24点
+        </h1>
+
+    </header>
+    <main>
+        <form>
+            第1个数<input type="text" class="numbers"><br>
+            第2个数<input type="text" class="numbers"><br>
+            第3个数<input type="text" class="numbers"><br>
+            第4个数<input type="text" class="numbers"><br>
+        </form>
+        <button onclick="getFrom();">提交</button><br>
+        <textarea id="output" rows="10">
+
+        </textarea>
+    </main>
+</body>
+
+</html>
