@@ -8,7 +8,8 @@
     <script>
         function count(n) {
             const s = ["+", "-", "*", "/"];
-            var trueNumberList = [];
+            var formulaList = [];
+            var trueFormulaList = [];
             var nList1 = Array.from(n);
             for (var ni1 = 0; ni1 < nList1.length; ni1++) {
                 var n1 = nList1[ni1];
@@ -30,10 +31,28 @@
                                     nList4.splice(ni3, 1);
                                     for (var ni4 = 0; ni4 < nList4.length; ni4++) {
                                         var n4 = nList4[ni4];
-                                        var formula = String(n1) + s1 + String(n2) + s2 + String(n3) + s3 + String(n4);
-                                        if (eval(formula) == 24 && !trueNumberList.includes(formula)) {
-                                            trueNumberList.push(formula);
-                                        }
+                                        var formula1 = String(n1) + s1 + String(n2) + s2 + String(n3) + s3 + String(n4);
+                                        var formula2 = "(" + String(n1) + s1 + String(n2) + ")" + s2 + String(n3) + s3 + String(n4);
+                                        var formula3 = String(n1) + s1 + "(" + String(n2) + s2 + String(n3) + ")" + s3 + String(n4);
+                                        var formula4 = String(n1) + s1 + String(n2) + s2 + "(" + String(n3) + s3 + String(n4) + ")";
+                                        var formula5 = "(" + String(n1) + s1 + String(n2) + ")" + s2 + "(" + String(n3) + s3 + String(n4) + ")";
+                                        var formula6 = "(" + String(n1) + s1 + String(n2) + s2 + String(n3) + ")" + s3 + String(n4);
+                                        var formula7 = String(n1) + s1 + "(" + String(n2) + s2 + String(n3) + s3 + String(n4) + ")";
+                                        var formula8 = "((" + String(n1) + s1 + String(n2) + ")" + s2 + String(n3) + ")" + s3 + String(n4);
+                                        var formula9 = "(" + String(n1) + s1 + "(" + String(n2) + s2 + String(n3) + "))" + s3 + String(n4);
+                                        var formula10 = String(n1) + s1 + "((" + String(n2) + s2 + String(n3) + ")" + s3 + String(n4) + ")";
+                                        var formula11 = String(n1) + s1 + "(" + String(n2) + s2 + "(" + String(n3) + s3 + String(n4) + "))";
+                                        formulaList.push(formula1);
+                                        formulaList.push(formula2);
+                                        formulaList.push(formula3);
+                                        formulaList.push(formula4);
+                                        formulaList.push(formula5);
+                                        formulaList.push(formula6);
+                                        formulaList.push(formula7);
+                                        formulaList.push(formula8);
+                                        formulaList.push(formula9);
+                                        formulaList.push(formula10);
+                                        formulaList.push(formula11);
                                     }
                                 }
                             }
@@ -41,20 +60,35 @@
                     }
                 }
             }
-            console.log(trueNumberList);
-            return trueNumberList;
+            console.log(formulaList);
+            for (i = 0; i < formulaList.length; i++) {
+                if (eval(formulaList[i]) === 24 && !trueFormulaList.includes(formulaList[i])) {
+                    trueFormulaList.push(formulaList[i]);
+                }
+            }
+            console.log(trueFormulaList);
+            return trueFormulaList;
         }
 
         function output(list) {
             var outputObj = document.getElementById("output");
             outputObj.innerHTML = "";
-            for (i = 0; i < list.length; i++){
-                var yuaninnerHTML = outputObj.innerHTML;
-                outputObj.innerHTML = outputObj.innerHTML + list[i] + "&#10";
+            if (list.length <= 0) {
+                outputObj.innerHTML = outputObj.innerHTML + "无结果";
             }
+            else {
+                for (i = 0; i < list.length; i++) {
+                    var yuaninnerHTML = outputObj.innerHTML;
+                    outputObj.innerHTML = outputObj.innerHTML + list[i] + "&#10";
+                }
+            }
+            var progressObj = document.getElementById("progress");
+            progressObj.style.display = "none";
         }
 
         function getFrom() {
+            var progressObj = document.getElementById("progress");
+            progressObj.style.display = "block";
             var numbers = [];
             var numbersObj = document.getElementsByClassName("numbers");
             for (i = 0; i < numbersObj.length; i++) {
@@ -81,8 +115,9 @@
             第4个数<input type="text" class="numbers"><br>
         </form>
         <button onclick="getFrom();">提交</button><br>
-        <textarea id="output" rows="10">
-
+        <progress id="progress" style="display:none;"></progress>
+        <textarea id="output" style="font-family: monospace;" rows="10">
+            
         </textarea>
     </main>
 </body>
