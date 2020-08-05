@@ -87,15 +87,23 @@
         }
 
         function getFrom() {
-            var progressObj = document.getElementById("progress");
-            progressObj.style.display = "block";
-            var numbers = [];
-            var numbersObj = document.getElementsByClassName("numbers");
-            for (i = 0; i < numbersObj.length; i++) {
-                numbers.push(numbersObj[i].value);
+            try {
+                var progressObj = document.getElementById("progress");
+                progressObj.style.display = "block";
+                var numbers = [];
+                var numbersObj = document.getElementsByClassName("numbers");
+                for (i = 0; i < numbersObj.length; i++) {
+                    numbers.push(numbersObj[i].value);
+                }
+                console.log(numbers);
+                output(count(numbers));
             }
-            console.log(numbers);
-            output(count(numbers));
+            catch (err) {
+                var progressObj = document.getElementById("progress");
+                progressObj.style.display = "none";
+                var outputObj = document.getElementById("output");
+                outputObj.innerHTML = "诶呀，出错了。错误内容：" + err;
+            }
         }
     </script>
 </head>
@@ -117,7 +125,7 @@
         <button onclick="getFrom();">提交</button><br>
         <progress id="progress" style="display:none;"></progress>
         <textarea id="output" style="font-family: monospace;" rows="10">
-            
+
         </textarea>
     </main>
 </body>
