@@ -21,7 +21,7 @@
 
         .main {
             margin: 1rem auto 0 auto;
-            max-width: 310px;
+            max-width: 420px;
 
             text-align: center;
         }
@@ -31,7 +31,7 @@
         }
 
         .main-form-label {
-            margin-bottom: 0.6rem;
+            display: inline-block;
         }
 
         .main-form-label-description {
@@ -44,22 +44,31 @@
             border: 1px solid lightgray;
             border-radius: 4px;
             padding: 10px;
-            width: 300px;
+            width: 50px;
             height: 36px;
 
+            text-align: center;
             font-size: 1rem;
+
+            outline: none;
         }
 
         .main-form-label-number:hover {
             border: 1px solid gray;
         }
 
+        .main-form-label-number:focus {
+            border: 2px solid black;
+        }
+
         .main-form-label-submit {
             display: inline-block;
-
+            
+            margin-top: 0.5rem;
             border: 1px solid lightgray;
             border-radius: 4px;
-            padding: 9px;
+            width: 50px;
+            height: 36px;
 
             background-color: white;
 
@@ -72,7 +81,6 @@
 
         .main-form-label-submit:active {
             border: 2px solid black;
-            padding: 8px;
         }
 
         .main-output {
@@ -91,6 +99,8 @@
         }
 
         .main-output-text {
+            margin: 0 auto;
+
             font-family: monospace;
 
             overflow: scroll;
@@ -110,21 +120,22 @@
     <main class="main">
         <div class="main-form">
             <section class="main-form-label">
-                <div class="main-form-label-description">1st number</div>
+                <div class="main-form-label-description">1st</div>
                 <input type="text" class="numbers main-form-label-number">
             </section>
             <section class="main-form-label">
-                <div class="main-form-label-description">2nd number</div>
+                <div class="main-form-label-description">2nd</div>
                 <input type="text" class="numbers main-form-label-number">
             </section>
             <section class="main-form-label">
-                <div class="main-form-label-description">3rd number</div>
+                <div class="main-form-label-description">3rd</div>
                 <input type="text" class="numbers main-form-label-number">
             </section>
             <section class="main-form-label">
-                <div class="main-form-label-description">4th number</div>
+                <div class="main-form-label-description">4th</div>
                 <input type="text" class="numbers main-form-label-number">
             </section>
+            <br>
             <button onclick="javascript:getForm();" class="main-form-label-submit">计算</button>
         </div>
         <progress id="progress" style="display:none;"></progress>
